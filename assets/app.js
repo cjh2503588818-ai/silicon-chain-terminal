@@ -333,7 +333,7 @@
       tile("N型复投料", "ps_price", { badge: "现货", spark: 60 }),
       tile("N型颗粒硅", "ps_gr", { badge: "现货", spark: 60 }),
       tile("厂家库存", "ps_inv", { badge: "周度", unit: "万吨", invert: true }),
-      tile("开工率", "ps_oi", { badge: "月度", unit: "%" }),
+      tile("主力合约持仓量", "ps_oi", { badge: "GFEX", unit: "手", delta: "abs", spark: 60 }),
       tile("周度产量", "ps_prodw", { badge: "周度", unit: "吨" }),
       tile("行业平均成本", "ps_cost", { badge: "日度", spark: 60, color: 1 })
     ]);
@@ -375,8 +375,8 @@
       CH.legend(gap, [{ name: "供需差（产量 − 需求）", color: "#B45309", line: 1, area: true }]);
     }
     lineInto($("#c-ps-op"), {
-      height: 210, unit: "%",
-      series: [ser("ps_oi", "多晶硅开工率", "#C2410C")].filter(Boolean)
+      height: 210, unit: "手",
+      series: [ser("ps_oi", "主力合约持仓量", "#C2410C")].filter(Boolean)
     });
     lineInto($("#c-ps-op2"), {
       height: 200, unit: "吨",
