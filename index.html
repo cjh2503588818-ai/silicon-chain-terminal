@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>硅产业链基本面终端 · Silicon Chain Fundamentals</title>
+<meta name="description" content="工业硅 / 多晶硅 / 硅片 / 电池片 / 组件 全链条量价库研终端">
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">
+    <div class="mark">Si</div>
+    <div class="brand-txt">
+      <div class="brand-cn">硅产业链基本面终端</div>
+      <div class="brand-en">SILICON CHAIN FUNDAMENTALS TERMINAL</div>
+    </div>
+  </div>
+  <div class="meta">
+    <div class="meta-item"><span class="k">数据截至</span><span class="v" id="m-asof">—</span></div>
+    <div class="meta-item"><span class="k">来源</span><span class="v">SMM 终端 + 内部平衡表</span></div>
+    <div class="meta-item"><span class="k">版本</span><span class="v">v2.0</span></div>
+  </div>
+  <div class="acts">
+    <button class="btn" onclick="window.print()">打印 / 导出 PDF</button>
+    <button class="btn ghost" onclick="location.reload()">刷新</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-page="ov"><span class="tab-cn">全链条总览</span><span class="tab-en">Chain Overview</span></button><button class="tab" data-page="si"><span class="tab-cn">工业硅</span><span class="tab-en">Silicon Metal</span></button><button class="tab" data-page="ps"><span class="tab-cn">多晶硅</span><span class="tab-en">Polysilicon</span></button><button class="tab" data-page="wf"><span class="tab-cn">硅片</span><span class="tab-en">Wafer</span></button><button class="tab" data-page="cl"><span class="tab-cn">电池片</span><span class="tab-en">Cell</span></button><button class="tab" data-page="md"><span class="tab-cn">组件</span><span class="tab-en">Module</span></button><button class="tab" data-page="model"><span class="tab-cn">模型与说明</span><span class="tab-en">Model & Method</span></button>
+</nav>
+
+<main class="wrap">
+    <section class="page active" id="pg-ov" data-key="ov">
+      <div class="page-head">
+        <h2>全链条总览<span class="en">Chain Overview</span></h2>
+        <p class="lead">硅产业链五个环节的价格、成本、库存与开工率的横向对照，用于定位当前的利润分布与库存压力所在。</p>
+      </div>
+      <div class="kpis" id="kpi-ov"></div>
+      <div class="grid">
+      <div class="card span12">
+        <div class="card-head"><h3>环节价格指数对比</h3><span class="tag">2025-01 = 100</span></div>
+        <div class="sub">以 2025 年 1 月为基期，将五个环节的代表性价格指数化，观察价格轮动与传导次序。</div>
+        
+        <div id="c-ov-index"></div>
+        <div class="src"><b>来源</b>SMM 各环节代表规格平均价</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>环节间价格比</h3><span class="tag">2025-01 = 100</span></div>
+        <div class="sub">相邻环节的价格比值（下游 ÷ 上游）指数化，观察利润在链内的挤压方向。</div>
+        
+        <div id="c-ov-spread"></div>
+        <div class="src"><b>来源</b>SMM 各环节代表规格平均价</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>各环节月度产量</h3><span class="tag">GW</span></div>
+        <div class="sub">硅片、电池片、组件的月度产出（同为 GW 口径可直接比较）；多晶硅产量见其环节页。</div>
+        
+        <div id="c-ov-output"></div>
+        <div class="src"><b>来源</b>SMM 月度产量</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>各环节库存合计</h3><span class="tag">万吨 / GW</span></div>
+        <div class="sub">各环节库存水位（工业硅社会库存、多晶硅厂家库存、硅片库存、电池片厂库存、组件成品库存）。</div>
+        
+        <div id="c-ov-inv"></div>
+        <div class="src"><b>来源</b>SMM 库存序列</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>各环节出口量</h3><span class="tag">万吨 / GW</span></div>
+        <div class="sub">海关口径出口量，外需是 2026 年国内过剩产能的重要出口通道。</div>
+        
+        <div id="c-ov-exp"></div>
+        <div class="src"><b>来源</b>中国海关 / SMM</div>
+      </div>
+      <div class="card span12">
+        <div class="card-head"><h3>核心判断</h3></div>
+        <div class="sub">由量价与库存数据直接推导的三条结论。</div>
+        
+        <div id="calls"></div>
+        <div class="src"><b>来源</b>本页模型输出</div>
+      </div>
+      </div>
+    </section>
+    <section class="page" id="pg-si" data-key="si">
+      <div class="page-head">
+        <h2>工业硅<span class="en">Silicon Metal</span></h2>
+        <p class="lead">工业硅是整条链的成本起点：西南丰枯水期的电价摆动、新疆与云南的成本差异、社会库存与出口节奏，决定了多晶硅的成本底。</p>
+      </div>
+      <div class="kpis" id="kpi-si"></div>
+      <div class="grid">
+      <div class="card span8">
+        <div class="card-head"><h3>价格：553# 与 421# 及期货</h3><span class="tag">元/吨</span></div>
+        <div class="sub">三地现货与 GFEX 主力合约，观察期现结构与品质价差。</div>
+        
+        <div id="c-si-price"></div>
+        <div class="src"><b>来源</b>SMM 现货 / GFEX 期货</div>
+      </div>
+      <div class="card span4">
+        <div class="card-head"><h3>主产区电价</h3><span class="tag">元/千瓦时</span></div>
+        <div class="sub">电力占工业硅成本约三到四成，丰枯水期电价差是季节性供给的核心变量。</div>
+        
+        <div id="c-si-power"></div>
+        <div class="src"><b>来源</b>内部成本模型</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>全国现金成本与现货价格</h3><span class="tag">元/吨</span></div>
+        <div class="sub">成本曲线与价格的贴合程度决定行业现金利润的分布。</div>
+        
+        <div id="c-si-cost"></div>
+        <div class="src"><b>来源</b>内部成本模型 / SMM 现货</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>月度现金利润</h3><span class="tag">元/吨</span></div>
+        <div class="sub">553 与 421 的月度平均现金利润，连续为负通常对应减产与价格反弹。</div>
+        
+        <div id="c-si-profit"></div>
+        <div class="src"><b>来源</b>内部成本模型</div>
+      </div>
+      <div class="card span12">
+        <div class="card-head"><h3>供需平衡（情形开关）</h3><span class="tag">万吨 / 月</span></div>
+        <div class="sub">两种情形：成本与能耗政策落地（落后产能出清）与不落地（产能延续）。</div>
+        <div class="seg-toggle" id="si-scen" data-active="landed"></div>
+        <div id="c-si-balance"></div>
+        <div class="src"><b>来源</b>内部平衡表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>供应结构与消费结构</h3><span class="tag">万吨 / 月</span></div>
+        <div class="sub">上：供应端按品种拆分；下：消费端按下游（多晶硅 / 有机硅 / 铝合金 / 其他）拆分。</div>
+        <div style="margin-top:12px"><div class="sub" style="margin:0 0 4px">消费结构（按下游）</div><div id="c-si-use"></div></div>
+        <div id="c-si-mix"></div>
+        <div class="src"><b>来源</b>内部平衡表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>年度供需平衡表</h3><span class="tag">万吨</span></div>
+        <div class="sub">年度供应、需求与供需差，含 2027 年预测。</div>
+        
+        <div id="t-si-annual"></div>
+        <div class="src"><b>来源</b>内部平衡表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>社会库存与港口结构</h3><span class="tag">万吨</span></div>
+        <div class="sub">全国金属硅社会库存及其在昆明、天津港、黄埔港与交割库的分布。</div>
+        
+        <div id="c-si-inv"></div>
+        <div class="src"><b>来源</b>SMM 库存</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>开工率（全国与主产区）</h3><span class="tag">%</span></div>
+        <div class="sub">全国与新疆、四川、云南的开工率，反映丰枯水期的供给弹性。</div>
+        
+        <div id="c-si-op"></div>
+        <div class="src"><b>来源</b>SMM 开工率</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>出口量</h3><span class="tag">万吨</span></div>
+        <div class="sub">中国海关口径金属硅出口量，外需对国内过剩的消化能力。</div>
+        
+        <div id="c-si-exp"></div>
+        <div class="src"><b>来源</b>中国海关</div>
+      </div>
+      </div>
+    </section>
+    <section class="page" id="pg-ps" data-key="ps">
+      <div class="page-head">
+        <h2>多晶硅<span class="en">Polysilicon</span></h2>
+        <p class="lead">多晶硅是当前链条上利润最集中的环节：供给端受能耗与成本政策约束，需求端由硅片排产决定，库存与仓单是价格的两条锚。</p>
+      </div>
+      <div class="kpis" id="kpi-ps"></div>
+      <div class="grid">
+      <div class="card span6">
+        <div class="card-head"><h3>价格：复投料、颗粒硅与混包料</h3><span class="tag">元/千克</span></div>
+        <div class="sub">N 型三条主要报价，品质与形态价差反映下游对致密料与颗粒硅的取舍。</div>
+        
+        <div id="c-ps-price"></div>
+        <div class="src"><b>来源</b>SMM 现货</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>成本与利润</h3><span class="tag">元/千克</span></div>
+        <div class="sub">行业平均成本与现货价格的差值为环节利润，是产量决策的直接依据。</div>
+        
+        <div id="c-ps-cost"></div>
+        <div class="src"><b>来源</b>SMM 成本 / 现货</div>
+      </div>
+      <div class="card span8">
+        <div class="card-head"><h3>中国月度产量与需求</h3><span class="tag">万吨 / 月</span></div>
+        <div class="sub">产量与需求量的对比，缺口由库存吸收或释放。</div>
+        
+        <div id="c-ps-balance"></div>
+        <div class="src"><b>来源</b>内部平衡表</div>
+      </div>
+      <div class="card span4">
+        <div class="card-head"><h3>开工率与周度产量</h3><span class="tag">% / 吨</span></div>
+        <div class="sub">月度开工率（上）与周度产量（下），跟踪实际供给节奏。</div>
+        <div style="margin-top:12px"><div class="sub" style="margin:0 0 4px">周度产量（吨）</div><div id="c-ps-op2"></div></div>
+        <div id="c-ps-op"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>库存：分环节与企业分布</h3><span class="tag">万吨</span></div>
+        <div class="sub">上游（硅料厂）、中游（硅片厂）与下游库存，以及主要企业的月度库存热力图。</div>
+        <div id="c-ps-invheat" style="margin-top:12px"></div>
+        <div id="c-ps-invstage"></div>
+        <div class="src"><b>来源</b>SMM / 内部库存表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>年度供需平衡表</h3><span class="tag">万吨</span></div>
+        <div class="sub">2023–2030 年产量、需求量与供需差，2026 年 9 月起为预测。</div>
+        
+        <div id="t-ps-annual"></div>
+        <div class="src"><b>来源</b>内部平衡表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>进出口</h3><span class="tag">万吨 / 月</span></div>
+        <div class="sub">多晶硅进口与出口量，进口替代与出口通道共同影响国内平衡。</div>
+        
+        <div id="c-ps-trade"></div>
+        <div class="src"><b>来源</b>中国海关</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>企业月度产量</h3><span class="tag">吨</span></div>
+        <div class="sub">主要多晶硅企业的月度产量热力图，观察份额与检修节奏。</div>
+        
+        <div id="c-ps-prod"></div>
+        <div class="src"><b>来源</b>SMM / 内部表</div>
+      </div>
+      </div>
+    </section>
+    <section class="page" id="pg-wf" data-key="wf">
+      <div class="page-head">
+        <h2>硅片<span class="en">Wafer</span></h2>
+        <p class="lead">硅片是链条上产能最过剩、价格战最激烈的环节：开工率与库存的被动升降，直接决定它对上游多晶硅的采购强度。</p>
+      </div>
+      <div class="kpis" id="kpi-wf"></div>
+      <div class="grid">
+      <div class="card span6">
+        <div class="card-head"><h3>价格：N183 / N210 与价格指数</h3><span class="tag">元/片</span></div>
+        <div class="sub">两个主流尺寸的价格与指数化走势，尺寸价差反映结构性供需。</div>
+        
+        <div id="c-wf-price"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>成本与利润</h3><span class="tag">元/片</span></div>
+        <div class="sub">N183 与 N210 的现金成本与单瓦利润，多数时段处于现金亏损区间。</div>
+        
+        <div id="c-wf-cost"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>产量：月度与周度</h3><span class="tag">GW</span></div>
+        <div class="sub">月度产量与周度高频产量，用于跟踪排产调整的即时性。</div>
+        
+        <div id="c-wf-prod"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>开工率（实际与预测）</h3><span class="tag">%</span></div>
+        <div class="sub">开工率与其预测值，是判断下一期多晶硅采购量的先行指标。</div>
+        
+        <div id="c-wf-op"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>库存</h3><span class="tag">GW</span></div>
+        <div class="sub">硅片库存的周度与月度口径，库存去化是价格企稳的必要条件。</div>
+        
+        <div id="c-wf-inv"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>出口量</h3><span class="tag">万吨 / 月</span></div>
+        <div class="sub">单晶硅片出口量，海外电池片产能是硅片外需的主要承接方。</div>
+        
+        <div id="c-wf-exp"></div>
+        <div class="src"><b>来源</b>中国海关</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>企业月度产量</h3><span class="tag">GW</span></div>
+        <div class="sub">主要硅片企业的月度产量热力图，观察专业化与一体化企业的份额变化。</div>
+        
+        <div id="c-wf-heat"></div>
+        <div class="src"><b>来源</b>内部表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>硅片企业多晶硅库存</h3><span class="tag">万吨</span></div>
+        <div class="sub">硅片厂手中的多晶硅原料库存，是其采购弹性的直接来源。</div>
+        
+        <div id="c-wf-psinvin"></div>
+        <div class="src"><b>来源</b>SMM 月度</div>
+      </div>
+      </div>
+    </section>
+    <section class="page" id="pg-cl" data-key="cl">
+      <div class="page-head">
+        <h2>电池片<span class="en">Cell</span></h2>
+        <p class="lead">电池片环节技术与产能迭代最快：Topcon 主流化后的产能过剩、库存高企与出口依赖，使该环节利润长期贴地运行。</p>
+      </div>
+      <div class="kpis" id="kpi-cl"></div>
+      <div class="grid">
+      <div class="card span6">
+        <div class="card-head"><h3>价格：Topcon 183 / 210 / 210R</h3><span class="tag">元/瓦</span></div>
+        <div class="sub">三个主流尺寸的电池片价格，尺寸价差反映产线升级进度。</div>
+        
+        <div id="c-cl-price"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>成本与利润</h3><span class="tag">元/瓦</span></div>
+        <div class="sub">N183 与 N210 的总成本与单瓦利润，观察亏损收窄或扩大的方向。</div>
+        
+        <div id="c-cl-cost"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>产量与产能</h3><span class="tag">GW</span></div>
+        <div class="sub">月度产量与年化产能的对比，反映产能利用率的长期趋势。</div>
+        
+        <div id="c-cl-prod"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>开工率</h3><span class="tag">%</span></div>
+        <div class="sub">光伏电池开工率，与硅片开工率对照可判断环节间排产错配。</div>
+        
+        <div id="c-cl-op"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>厂内库存</h3><span class="tag">GW</span></div>
+        <div class="sub">光伏电池厂库存总量（周度），是价格短期弹性的主要来源。</div>
+        
+        <div id="c-cl-inv"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>出口量</h3><span class="tag">亿个 / 月</span></div>
+        <div class="sub">海关口径电池片出口量（个），海外组件产能对国内电池片的依赖度。</div>
+        
+        <div id="c-cl-exp"></div>
+        <div class="src"><b>来源</b>中国海关</div>
+      </div>
+      </div>
+    </section>
+    <section class="page" id="pg-md" data-key="md">
+      <div class="page-head">
+        <h2>组件<span class="en">Module</span></h2>
+        <p class="lead">组件是链条的终端出口：价格受集中式招标与分布式渠道双轨定价约束，排产、库存与出口共同决定它对上游电池片的拉动力。</p>
+      </div>
+      <div class="kpis" id="kpi-md"></div>
+      <div class="grid">
+      <div class="card span6">
+        <div class="card-head"><h3>价格：分布式市场（210 / 210R / HJT / BC）</h3><span class="tag">元/瓦</span></div>
+        <div class="sub">分布式渠道的多技术路线报价，技术溢价是 2026 年组件端仅存的利润来源。</div>
+        
+        <div id="c-md-price"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>集中式价格与中标均价</h3><span class="tag">元/瓦</span></div>
+        <div class="sub">集中式项目报价与周度中标均价，反映招标市场的真实成交水平。</div>
+        
+        <div id="c-md-price2"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>成本与利润</h3><span class="tag">元/瓦</span></div>
+        <div class="sub">N183 与 N210 的组件总成本与单瓦利润。</div>
+        
+        <div id="c-md-cost"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>产量与排产</h3><span class="tag">GW</span></div>
+        <div class="sub">总产量、N 型与境内外产量结构，以及境内月度排产计划。</div>
+        
+        <div id="c-md-prod"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>开工率（境内 / 境外）</h3><span class="tag">%</span></div>
+        <div class="sub">境内与境外组件开工率，海外产能爬坡是开工率分化的主因。</div>
+        
+        <div id="c-md-op"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>库存：成品与欧洲仓</h3><span class="tag">GW</span></div>
+        <div class="sub">国内成品库存与欧洲仓库库存，是出口节奏与价格压力的先行指标。</div>
+        
+        <div id="c-md-inv"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>出口量</h3><span class="tag">GW / 月</span></div>
+        <div class="sub">海关口径组件出口量，外需决定了国内产能的边际出路。</div>
+        
+        <div id="c-md-exp"></div>
+        <div class="src"><b>来源</b>中国海关</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>全球新增装机</h3><span class="tag">GW / 月</span></div>
+        <div class="sub">全球月度新增装机容量，终端需求增速决定整条链条的长期斜率；该序列目前更新至 2026-03。</div>
+        
+        <div id="c-md-inst"></div>
+        <div class="src"><b>来源</b>SMM</div>
+      </div>
+      </div>
+    </section>
+    <section class="page" id="pg-model" data-key="model">
+      <div class="page-head">
+        <h2>模型与说明<span class="en">Model & Method</span></h2>
+        <p class="lead">因子评分模型与数据口径说明：多空打分用于量化驱动因子的方向与强度，方法与来源供复核。</p>
+      </div>
+
+      <div class="grid">
+      <div class="card span12">
+        <div class="card-head"><h3>因子评分：多空强度</h3><span class="tag">分</span></div>
+        <div class="sub">中轴为中性，右侧为多头分数、左侧为空头分数。分数由当前值与历史均值/峰值的相对位置映射。</div>
+        <div class="sub" id="score-note" style="margin-top:8px;color:#9AA5AF"></div>
+        <div id="c-score"></div>
+        <div class="src"><b>来源</b>内部总得分表</div>
+      </div>
+      <div class="card span12">
+        <div class="card-head"><h3>评分明细</h3><span class="tag">分</span></div>
+        <div class="sub">权重、当前值、均值与多空权重系数逐项对照。</div>
+        
+        <div id="t-score"></div>
+        <div class="src"><b>来源</b>内部总得分表</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>数据来源</h3></div>
+        <div class="sub">本页数据的全部来源与取数方式。</div>
+        
+        <div id="t-sources"></div>
+        <div class="src"><b>来源</b>—</div>
+      </div>
+      <div class="card span6">
+        <div class="card-head"><h3>口径与提示</h3></div>
+        <div class="sub">数据口径、已知局限与免责声明。</div>
+        
+        <div id="t-method"></div>
+        <div class="src"><b>来源</b>—</div>
+      </div>
+      </div>
+    </section>
+</main>
+
+<footer class="foot">
+  <div>硅产业链基本面终端 · 数据来源：SMM 上海有色网（现货、库存、开工率、成本、海关）与内部平衡表 / 成本模型。</div>
+  <div>本页数据仅供研究参考，不构成投资建议；预测值依赖模型假设，实际结果可能存在重大偏差。</div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/charts.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
